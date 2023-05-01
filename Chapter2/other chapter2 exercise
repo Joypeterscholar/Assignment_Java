@@ -1,0 +1,30 @@
+2.9 	
+	a)
+	b) True, they are all valid names.
+	c) False, addition does not have the highest precedence.
+	d) True, they are all invalid names.
+	
+	
+	
+2.10 
+        a) x = 10
+	b) Value of 5 1 is 5
+	c) x is 5 and y is 1
+	d) 6 is not equal to 5
+	
+2.11 
+The Java statements containing variables whose values are modified are: a, c, d.
+
+2.12  
+	These are the correct java statements 
+	a) y = a * x * x + 5 * x + 2;  
+	b) y = a * x * x + (5 * x) + 2;
+	
+2.13
+     The output that will be printed for the first java code snippet is 13 and this is because, Multiplication has a higher precedence, hence it will carry out the calculation for the operands on its left and right first before summing for the summation, while the output for the second java code snippet is 14, and this is because the calculation starts from the operands carring the higher precedence, which is p and 2, before summing for 4.
+     
+2.19	Seven
+2.20	Three
+2.21 	Straight line.
+2.22	Two
+2.23 	Four.
