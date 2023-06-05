@@ -50,5 +50,21 @@ public class Diary {
         }
         return null;
     }
+
+    public void deleteGistById(int id) {
+      Entry entry = findEntriesById(1);
+                Diaries.remove(entry);
+            }
+
+    public void updateEntry(String title, String body) {
+  if (!isLocked)updateEntryWith(title,body);
+    }
+    private void updateEntryWith(String title, String body) {
+        Entry findEntry = findEntriesById(1);
+        findEntry.setId(1);
+    }
+
+    public void addEntry(String title, String body) {
+    }
 }
 
