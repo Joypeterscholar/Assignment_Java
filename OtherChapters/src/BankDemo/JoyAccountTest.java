@@ -1,6 +1,8 @@
 package BankDemo;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -21,10 +23,10 @@ public class JoyAccountTest {
 
     @Test
     public void testThatWeCanDeposit() {
-      JoyAccount account = new JoyAccount("Joy", "Peter", 25, "Juno Hostel, Delta", "1234567899", "1234");
-      assertEquals(0, account.checkBalance());
-      account.deposit(5000);
-      assertEquals(5000, account.checkBalance());
+        JoyAccount account = new JoyAccount("Joy", "Peter", 25, "Juno Hostel, Delta", "1234567899", "1234");
+        assertEquals(0, account.checkBalance());
+        account.deposit(5000);
+        assertEquals(5000, account.checkBalance());
     }
 
     @Test
@@ -66,6 +68,4 @@ public class JoyAccountTest {
         account.withdraw(7000);
         assertEquals(5000, account.checkBalance());
     }
-
-
 }

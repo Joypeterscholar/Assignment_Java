@@ -84,9 +84,9 @@ public class BankDemo {
             display("Invalid account number entered. Please enter only numbers. Returning....");
             displayMainMenu();
         }
-        JoyAccount account;
+        String account;
         try {
-            account = bank.findBankAccount(accountNumber);
+            account = String.valueOf(JoyBank.findBankAccount(accountNumber));
             display(account.toString());
             displayMainMenu();
         }
@@ -265,7 +265,7 @@ public class BankDemo {
         displayMainMenu();
     }
 
-    private static void exit() {
+    private static void exit(){
         display("thanks for using our application");
         System.exit(0);
     }

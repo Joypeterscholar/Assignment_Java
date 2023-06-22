@@ -23,7 +23,7 @@ public class JoyAccount {
         this.bvn = bvn;
         this.pin = pin;
         this.balance = 0;
-        this.accountNumber = generateAccountNumber();
+        this.accountNumber = JoyBank.generateAccountNumber();
         this.createdAt = LocalDateTime.now();
     }
 
@@ -35,28 +35,33 @@ public class JoyAccount {
         this.bvn = bvn;
         this.pin = pin;
         this.balance = balance;
-        this.accountNumber = generateAccountNumber();
+        this.accountNumber = JoyBank.generateAccountNumber();
         this.createdAt = LocalDateTime.now();
     }
 
 
     public String getFirstName() {
+
         return firstName;
     }
 
     public String getLastName() {
+
         return lastName;
     }
 
     public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
     public int getAge() {
+
         return age;
     }
 
     public void setAge(int age) {
+
         this.age = age;
     }
 
@@ -65,18 +70,22 @@ public class JoyAccount {
     }
 
     public void setAddress(String address) {
+
         this.address = address;
     }
 
     public boolean validatePin(String enteredPin) {
+
         return this.pin.equals(enteredPin);
     }
 
     public void setPin(String pin) {
+
         this.pin = pin;
     }
 
     public int checkBalance() {
+
         return balance;
     }
 
@@ -94,21 +103,14 @@ public class JoyAccount {
 
     public String getBvn() {
         return bvn;
+
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    private static String generateAccountNumber() {
-        SecureRandom random = new SecureRandom();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < 10; i++){
-            int generated = random.nextInt(0, 10);
-            builder.append(generated);
-        }
-        return builder.toString();
-    }
+
 
     @Override
     public String toString() {

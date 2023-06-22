@@ -1,51 +1,43 @@
+import java.util.Arrays;
+import java.util.Random;
+
 public class Timestable {
+    private static final int SIZE = 9;
+
     public static void main(String[] args) {
-            for (int j = 1; j < 21; j++) {
-                System.out.print(" "+j);
+        int[][] board = generateSudokuBoard();
+        printBoard(board);
+    }
+
+    private static int[][] generateSudokuBoard() {
+        int[][] board = new int[SIZE][SIZE];
+        Random random = new Random();
+
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                int num;
+                do {
+                    num = random.nextInt(SIZE) + 1;
+                } while (!isValid(board, row, col, num));
+                board[row][col] = num;
             }
-            System.out.println();
-            for (int k = 2; k < 41; k = k + 2) {
-                System.out.print(" "+k);
+        }
+
+        return board;
+    }
+
+    private static boolean isValid(int[][] board, int row, int col, int num) {
+        for (int i = 0; i < SIZE; i++) {
+            if (board[row][i] == num || board[i][col] == num) {
+                return false;
             }
-        System.out.println();
-        for (int a = 3; a < 61; a = a + 3) {
-            System.out.print(" "+a);
         }
-        System.out.println();
-        for (int a = 4; a < 81; a = a + 4) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 5; a < 101; a = a + 5) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 6; a < 121; a = a + 6) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 7; a < 141; a = a + 7) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 8; a < 161; a = a + 8) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 9; a < 181; a = a + 9) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 10; a < 201; a = a + 10) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 11; a < 221; a = a + 11) {
-            System.out.print(" "+a);
-        }
-        System.out.println();
-        for (int a = 12; a < 241; a = a + 12) {
-            System.out.print(" "+a);
+        return true;
+    }
+
+    private static void printBoard(int[][] board) {
+        for (int row = 0; row < SIZE; row++) {
+            System.out.println(Arrays.toString(board[row]));
         }
     }
 }

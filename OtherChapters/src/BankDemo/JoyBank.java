@@ -1,11 +1,12 @@
 package BankDemo;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JoyBank {
 
-    public  List<JoyAccount> accounts = new ArrayList<>();
+    public static List<JoyAccount> accounts = new ArrayList<>();
 
     public String registerNewCustomer(String firstName, String lastName, int age, String address, String bvn, String pin) {
         if (firstName.equals("")) {
@@ -41,7 +42,7 @@ public class JoyBank {
         if (amount <= 0) {
             throw new IllegalArgumentException("Enter a valid amount");
         }
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 account.deposit(amount);
                 return "SUCCESSFUL";
@@ -54,7 +55,7 @@ public class JoyBank {
         if (amount <= 0) {
             throw new IllegalArgumentException("Enter a valid amount");
         }
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 if (!account.validatePin(pin)) {
                     throw new IllegalArgumentException("Incorrect Pin!");
@@ -73,19 +74,18 @@ public class JoyBank {
         if (amount <= 0) {
             throw new IllegalArgumentException("Enter a valid amount");
         }
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumberOfSender)) {
                 if (!account.validatePin(pin)) {
                     throw new IllegalArgumentException("Incorrect Pin!");
                 }
                 if (amount <= account.checkBalance()) {
                     account.withdraw(amount);
-                }
-                else {
+                } else {
                     throw new ArithmeticException("Insufficient funds!");
                 }
 
-                for (JoyAccount accountToReceive: accounts) {
+                for (JoyAccount accountToReceive : accounts) {
                     if (accountToReceive.getAccountNumber().equals(accountNumberOfReceiver)) {
                         accountToReceive.deposit(amount);
                         return;
@@ -95,9 +95,9 @@ public class JoyBank {
         }
     }
 
-    public JoyAccount findBankAccount(String accountNumber) {
-        for (JoyAccount account: accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
+    public static JoyAccount findBankAccount(String accountNumber) {
+        for (JoyAccount account : accounts) {
+            if (accountNumber.equals(generateAccountNumber())) {
                 return account;
             }
         }
@@ -105,7 +105,7 @@ public class JoyBank {
     }
 
     public boolean checkIfAccountExists(String accountNumber) {
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 return false;
             }
@@ -114,7 +114,7 @@ public class JoyBank {
     }
 
     public String checkAccountBalance(String accountNumber, String pin) {
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 if (!account.validatePin(pin)) throw new RuntimeException("Invalid pin entered.");
                 return "Hi, " + account.getFirstName() + " " + account.getLastName() + "\n" + "Your balance is: " + account.checkBalance();
@@ -124,11 +124,21 @@ public class JoyBank {
     }
 
     public boolean validateUserCredentials(String accountNumber, String pin) {
-        for (JoyAccount account: accounts) {
+        for (JoyAccount account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 return account.validatePin(pin);
             }
         }
         return false;
+    }
+
+   public static String generateAccountNumber() {
+        SecureRandom random = new SecureRandom();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            int generated = random.nextInt(0, 10);
+            builder.append(generated);
+        }
+        return builder.toString();
     }
 }

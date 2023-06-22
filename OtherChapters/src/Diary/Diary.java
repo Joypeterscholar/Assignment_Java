@@ -1,18 +1,15 @@
 package Diary;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-        import java.util.List;
-
-public class Diary {
+import java.util.List;
+class Diary {
     private boolean isLocked = true;
     private String username;
     private String password;
-    private int gistCounter = 0;
-    List<Entry> Diaries = new ArrayList<>();
+    private List<Entry> entries = new ArrayList<>();
 
-
-    public Diary(String userName, String password) {
-
+    public Diary(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -20,51 +17,69 @@ public class Diary {
         return isLocked;
     }
 
-    public void unlockWith(String password) {
-        boolean passwordIsCorrect = password.equals(this.password);
-        if (passwordIsCorrect) unlockDiary();
-
-    }
-
-    private boolean unlockDiary() {
-        return isLocked = false;
-    }
-
-    public void lock() {
-        isLocked = true;
+    public boolean unlockWith(String password) {
+        if (password.equals(this.password)) {
+            isLocked = false;
+            return true;
+        }
+        return false;
     }
 
     public void createEntry(String title, String body) {
-        Entry entry = new Entry(title, body);
-        Diaries.add(entry);
+        Entry entry = new Entry(getNextEntryId(), title, body);
+        entries.add(entry);
+    }
+
+    public Entry viewEntryById(int id) {
+        for (Entry entry : entries) {
+            if (entry.getId() == id) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteEntryById(int id) {
+        for (Entry entry : entries) {
+            if (entry.getId() == id) {
+                entries.remove(entry);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateEntry(int id, String newTitle, String newBody) {
+        for (Entry entry : entries) {
+            if (entry.getId() == id) {
+                entry.setTitle(newTitle);
+                entry.setBody(newBody);
+                return true;
+            }
+        }
+        return false;
     }
 
     public int countEntries() {
-        return Diaries.size();
+        return entries.size();
     }
 
+    private int getNextEntryId() {
+        return entries.size() + 1;
+    }
+    public void lock() {
+        isLocked = true;
+   }
     public Entry findEntriesById(int id) {
-        for (Entry entry : Diaries) {
+        for (Entry entry : entries) {
             if (entry.getId() == id)
                 return entry;
         }
         return null;
     }
 
-    public void deleteGistById(int id) {
-      Entry entry = findEntriesById(1);
-                Diaries.remove(entry);
-            }
+    public String viewAll(){
+        return entries.toString();
 
-    public void updateEntry(String title, String body) {
-  if (!isLocked)updateEntryWith(title,body);
-    }
-    private void updateEntryWith(String title, String body) {
-        Entry findEntry = findEntriesById(1);
-        findEntry.setId(1);
-    }
-
-    public void addEntry(String title, String body) {
     }
 }
-

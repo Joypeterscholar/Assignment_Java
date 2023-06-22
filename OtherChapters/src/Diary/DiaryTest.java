@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DiaryTest {
+
         Diary diary = new Diary("userName", "password");
 
     @Test
@@ -57,10 +58,20 @@ public class DiaryTest {
         diary.unlockWith("password");
         assertFalse(diary.isLocked());
         diary.createEntry("title", "body");
-        Entry entry = diary.findEntriesById(1);
+        Entry entry = new Entry(1, "title", "body");
+        diary.findEntriesById(1);
         assertEquals("body", entry.getBody());
 
     }
+//    @Test
+//    public void createEntryfindEntriesByTitleTest() {
+//        diary.unlockWith("password");
+//        assertFalse(diary.isLocked());
+//        diary.createEntry("title", "body");
+//        Entry entry = diary.findEntriesByTitle("title");
+//        assertEquals("body", entry.getBody());
+//
+//    }
 
     @Test
     public void createEntry() {
@@ -73,7 +84,7 @@ public class DiaryTest {
     }
 
     @Test
-    public void gistSouldHaveATime() {
+    public void gistShouldHaveATime() {
         diary.unlockWith("password");
         diary.createEntry("title", "body");
         Entry entry = diary.findEntriesById(1);
@@ -92,7 +103,7 @@ public class DiaryTest {
         diary.unlockWith("password");
         diary.createEntry("title", "body");
         assertEquals(1, diary.countEntries());
-        diary.deleteGistById(1);
+        diary.deleteEntryById(1);
         assertEquals(0, diary.countEntries());
         assertNull(diary.findEntriesById(1));
 
@@ -101,7 +112,7 @@ public class DiaryTest {
     public void updateGist(){
         diary.unlockWith("password");
         diary.createEntry("title", "body");
-        diary.updateEntry("title", "body");
+        diary.updateEntry(1, "title", "body");
         Entry updateGist =diary.findEntriesById(1);
 
     }

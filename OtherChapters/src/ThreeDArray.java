@@ -1,10 +1,16 @@
+import java.util.Arrays;
+
 public class ThreeDArray {
     public static void main(String[] args) {
-        int[][][] nice = {{{4, 5, 6, 7, 8}, {6, 5, 8, 3}}, {{6, 3, 2, 6, 8}, {6, 8, 3}, {6, 7}}};
+        int[][][] nice = new int[7][7][7];
         for (int[][] i : nice) {
+            System.out.print(i.toString());
+            System.out.println();
             for (int[] j : i) {
+                System.out.print(Arrays.stream(j).toArray());
+                System.out.println();
                 for (int k : j) {
-                    System.out.print(k);
+                    System.out.println();
                 }
             }
         }
